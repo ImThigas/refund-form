@@ -71,6 +71,7 @@ function expenseAdd(newExpense){
         expenseItem.append(expenseIcon, expenseInfo, expenseAmount, removeIcon)
         expenseList.append(expenseItem)
         
+        formClear()
         updateTotals()
     }catch(error){
         alert("Não foi possível atualizar a lista de despesas.")
@@ -112,4 +113,20 @@ function updateTotals(){
         alert("Não foi possível atualizar os totais.")
         console.log(error)
     }
+}
+
+expenseList.addEventListener("click", function(event){
+    if(event.target.classList.contains("remove-icon")){
+        const item = event.target.closest(".expense")
+        item.remove()
+    }
+    updateTotals()
+})
+
+function formClear(){
+    expense.value = ""
+    category.value = ""
+    amount.value= ""
+
+    expense.focus()
 }
